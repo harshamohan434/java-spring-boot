@@ -1,13 +1,34 @@
 package org.example;
 
+import org.example.executor.TaskExecutorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 /**
  * Hello world!
  *
  */
-public class App 
-{
+
+@SpringBootApplication
+public class App implements CommandLineRunner {
+
+    @Autowired
+    TaskExecutorService taskExecutorService;
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+        SpringApplication.run(App.class,args);
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        taskExecutorService.executeTask(() -> {
+            System.out.println("Task 1 executed");
+        });
+
+        taskExecutorService.executeTask(() -> {
+            System.out.println("Task 2 executed");
+        });
     }
 }
