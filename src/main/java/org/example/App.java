@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 
 /**
  * Hello world!
@@ -12,7 +14,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  */
 
 @SpringBootApplication
-public class App implements CommandLineRunner {
+@EnableAsync
+@EnableWebSecurity
+public class App {//implements CommandLineRunner {
 
     @Autowired
     TaskExecutorService taskExecutorService;
@@ -21,14 +25,14 @@ public class App implements CommandLineRunner {
         SpringApplication.run(App.class,args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
-        taskExecutorService.executeTask(() -> {
-            System.out.println("Task 1 executed");
-        });
-
-        taskExecutorService.executeTask(() -> {
-            System.out.println("Task 2 executed");
-        });
-    }
+//    @Override
+//    public void run(String... args) throws Exception {
+//        taskExecutorService.executeTask(() -> {
+//            System.out.println("Task 1 executed");
+//        });
+//
+//        taskExecutorService.executeTask(() -> {
+//            System.out.println("Task 2 executed");
+//        });
+//    }
 }
