@@ -14,12 +14,4 @@ public class TaskExecutorService {
     public void init(){
         this.executorService = Executors.newFixedThreadPool(5);
     }
-
-    public void executeTask(Runnable task){
-        executorService.submit(task);
-    }
-
-    public void shutdown(){
-        executorService.shutdown();
-    }
 }
